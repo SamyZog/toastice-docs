@@ -1,0 +1,55 @@
+---
+sidebar_position: 1
+---
+
+# Overview
+
+The package has two exports, the `ToasticeContainer` component that acts as a control hub, and the `toast` function that emits a toast when called.
+
+## ToasticeContainer
+
+`ToasticeContainer` receives several props that customizes the look, behavior and position of all the toasts on the screen. It is a global configuration that can be overwritten by the `toast` function.
+
+```jsx
+<ToasticeContainer
+  type="default"
+  theme="filled"
+  animation="pop"
+  autoClose={5000}
+  closeOnClick={true}
+  limit={3}
+  margin="normal"
+  newestOnTop={false}
+  pauseOnHover={true}
+  position="bottom-right"
+  showCloseButton={true}
+  showIcon={true}
+  role="alert"
+  elevated={true}
+/>
+```
+
+## toast
+
+The `toast` function takes a similar batch of params, with some global ones omitted (`margin`, `limit` and `newestOnTop`). As mentioned above, a single toastice's configuration takes precedence over the one provided to the `ToasticeContainer`.
+
+```jsx
+toast("Hello World!", {
+  id: auto-generated or <string | number>,
+  delay: 0,
+  onClose: undefined,
+  onOpen: undefined,
+  onProgress: undefined,
+  type: "default",
+  theme: "filled",
+  animation: "pop",
+  autoClose: 5000,
+  closeOnClick: true,
+  pauseOnHover: true,
+  position: "bottom-right",
+  showCloseButton: true,
+  showIcon: true,
+  role: "alert",
+  elevated: true,
+});
+```

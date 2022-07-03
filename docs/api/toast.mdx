@@ -1,0 +1,194 @@
+---
+sidebar_position: 2
+---
+
+# toast
+
+The `toast` function basically emits toasts to the screen. When called, it returns the an `id`, which is auto-generated or manually passed in when calling the function.
+
+```jsx
+import { toast } from "toastice";
+
+// id = 1
+const id = toast("Hello World", { id: 1 });
+
+// id = unique auto-generated string value (ex: "V1StGXR8_Z5jdHi6B-myT")
+const id = toast("Hello World");
+```
+
+## Arguments
+
+The `toast` function takes in two arguments:
+
+### content: `string | number`
+
+A `string` or a `number` value that will be displayed in the toast when the function is called.
+
+### settings: `ToasticeProps`
+
+A configuration object, for default values see [here](/docs/api/overview#toast)
+
+- ### id: `string | number`
+
+  Unique identifier for a toast, only one toast with the same `id` can be emitted at a time.
+
+- ### delay: `number`
+
+  The delay period after which the toast will show up on the screen.
+
+- ### onClose: `() => void`
+
+  A callback that is invoked just before the toast is dismissed, either manually or automatically.
+
+- ### onOpen: `(params: ToasticePropsWithContent) => void`
+
+  A callback that is invoked just after the toast is displayed.
+
+- ### onProgress: `(progress: number) => void`
+
+  A function that is continuously ran for the duration of the countdown, it gives the caller access to the dynamically updated progress value (from `100` to `0`), that is updated on every tick for the duration provided in the `autoClose` setting.
+
+  ```jsx
+  import { toast } from "toastice";
+
+  const id = toast("Hello World", {
+    autoClose: 3000,
+    onProgress: (progress) => {
+      log(progress); // 100 -> 0
+    },
+  });
+  ```
+
+- ### type: `"default"|"success"|"warning"|"error"|"info"`
+
+  The type of the toast, it provides a visual cue as to the nature of the message.
+
+- ### theme: `"filled"|"outlined"|"glass"`
+
+  The theme of the toast.
+
+- ### animation: `"pop"|"fade"|"slide"`
+
+  The type of animation used to animate the toast in and out of the screen.
+
+- ### autoClose: `false|number`
+
+  The period after which a toast should automatically close.
+
+- ### closeOnClick: `boolean`
+
+  If `true` the toast is clickable anywhere on its surface, a click causes the toast to close.
+
+- ### pauseOnHover: `boolean`
+
+  If `true` the user can pause the countdown of the autoClose period.
+
+- ### position: `"top-left"|"top-center"|"top-right"|"bottom-left"|"bottom-center"|"bottom-right"`
+
+  THe toasts list position on the screen.
+
+- ### showCloseButton: `boolean`
+
+  If `true` the close button will be visible, this works well with `closeOnClick`.
+
+- ### showIcon: `boolean`
+
+  Each toast type, except `default`, has its own `Icon`, this flag controls whether it is visible or not.
+
+- ### role: `string`
+
+  Defines the ARIA role for the toast
+
+- ### elevated: `boolean`
+
+  If `true`, a shadow appears under the toast.
+
+<br />
+
+The `toast` function has two methods that expand the functionality of the function:
+
+## toast.dismiss
+
+A function that takes in an optional `id` of an already emitted toast and removes it off the screen programmatically. If an `id` is not provided, then all the toasts will be dismissed.
+
+```jsx
+import { useRef } from "react";
+import { ToasticeContainer, toast } from "toastice";
+import "toastice/toastice.css";
+
+const App = () => {
+  const id = useRef();
+
+  const showToastice = () => {
+    id.current = toast("Hello World");
+  };
+
+  const dismissToastice = () => {
+    toast.dismiss(id.current);
+  };
+
+  const dismissAllToastices = () => {
+    toast.dismiss();
+  };
+
+  return (
+    <>
+      <button onClick={showToastice}>Show Toastice</button>
+      <button onClick={showToastice}>Close Toastice</button>
+      <button onClick={closeToastice}>Close All Toastices</button>
+      <ToasticeContainer />
+    </>
+  );
+};
+```
+
+## toast.update
+
+A function that updates the params of a toast programmatically, usually used to alter the look and message of a toast in response to an action. It takes two arguments, the `id` of the toast to be updated, and the new settings that will be merged with the default ones.
+
+```jsx
+import { useRef } from "react";
+import { ToasticeContainer, toast } from "toastice";
+import "toastice/toastice.css";
+
+const App = () => {
+  const id = useRef();
+
+  const showToastice = () => {
+    id.current = toast("Signing In...", {
+      type: "default",
+      autoClose: false,
+    });
+  };
+
+  const updateToastice = (params) => {
+    toast.update(id.current, params);
+  };
+
+  const signIn = async () => {
+    try {
+      showToastice();
+      const result = await userSignIn(credentials);
+
+      updateToastice({
+        content: result,
+        type: "success",
+        autoClose: 5000,
+      });
+    } catch (err) {
+      updateToastice({
+        content: err,
+        type: "error",
+        autoClose: 5000,
+      });
+    }
+  };
+
+  return (
+    <>
+      <button onClick={signIn}>Sign In</button>
+      <ToasticeContainer />
+    </>
+  );
+};
+```

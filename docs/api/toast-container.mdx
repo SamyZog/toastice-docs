@@ -1,0 +1,68 @@
+---
+sidebar_position: 3
+sidebar_label: "ToastContainer"
+---
+
+# ToastContainer
+
+The brains behind the operation, a wrapper around an event driven architecture which is fast, responsive and performant. Accepts the following props:
+
+## Props
+
+The `ToastContainer` component accepts the same parameters as the `toast` function, and additionally receives other global props (margin, limit and newestOnTop):
+
+- ### type: `"default"|"success"|"warning"|"error"|"info"`
+
+  The type of the toast, it provides a visual cue as to the nature of the message.
+
+- ### theme: `"filled"|"outlined"|"glass"`
+
+  The theme of the toast.
+
+- ### animation: `"pop"|"fade"|"slide"`
+
+  The type of animation used to animate the toast in and out of the screen.
+
+- ### autoClose: `false|number`
+
+  The period after which a toast should automatically close.
+
+- ### closeOnClick: `boolean`
+
+  If `true` the toast is clickable anywhere on its surface, a click causes the toast to close.
+
+- ### limit: `false|number`
+
+  The maximum amount of toasts displayed in a single position on the screen, when the limit is reached, the toasts are enqueued and shown when a free spot is available.
+
+- ### margin: `"normal"|"dense"`
+
+  This controls the distance between the edge of the screen and the displayed toast.
+
+- ### newestOnTop: `boolean`
+
+  Display the newest toasts on top.
+
+- ### pauseOnHover: `boolean`
+
+  If `true` the user can pause the countdown of the autoClose period.
+
+- ### position: `"top-left"|"top-center"|"top-right"|"bottom-left"|"bottom-center"|"bottom-right"`
+
+  THe toasts list position on the screen.
+
+- ### showCloseButton: `boolean`
+
+  If `true` the close button will be visible, this works well with `closeOnClick`.
+
+- ### showIcon: `boolean`
+
+  Each toast type, except `default`, has its own `Icon`, this flag controls whether it is visible or not.
+
+- ### role: `string`
+
+  Defines the ARIA role for the toast
+
+- ### elevated: `boolean`
+
+  If `true`, a shadow appears under the toast.
