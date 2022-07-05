@@ -20,9 +20,19 @@ const id = toast("Hello World");
 
 The `toast` function takes in two arguments:
 
-### content: `string | number`
+### content: `string|number|RenderCustomToastice`
 
 A `string` or a `number` value that will be displayed in the toast when the function is called.
+
+OR
+
+A render function that returns a React Component, all params provided in the `settings` will be passed to the render function in addition to other props:
+
+- `close`: function when called, dismisses the toast
+
+- `Icon`: the `Icon` component displayed according to the `type` field in `settings`
+
+- `progress`: dynamically updated progress value (from `100` to `0`), that is updated on every tick for the duration provided in the `autoClose` setting
 
 ### settings: `ToasticeProps`
 

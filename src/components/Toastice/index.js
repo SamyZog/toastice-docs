@@ -26,7 +26,7 @@ const booleans = [
   "showIcon",
   "elevated",
   "newestOnTop",
-  "compact",
+  "fullWidth",
 ];
 const inputs = ["autoClose", "limit", "delay"];
 
@@ -60,7 +60,7 @@ const Toastice = () => {
     margin: "normal",
     newestOnTop: false,
     limit: 3,
-    compact: false,
+    fullWidth: false,
   });
 
   const showToastice = () => {
@@ -159,7 +159,7 @@ const Toastice = () => {
                       label={boolean}
                       checked={defaultToastProps[boolean]}
                       onChange={
-                        boolean === "newestOnTop" || boolean === "compact"
+                        boolean === "newestOnTop" || boolean === "fullWidth"
                           ? setContainerDefaultProps
                           : setDefaultToastProps
                       }
