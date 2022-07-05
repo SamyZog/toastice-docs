@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # Getting Started
 
-`Toastice` is a small [8.3kB](https://bundlephobia.com/package/toastice@1.0.0) library that makes adding toasts to your project, easy and simple. It is written in `typescript` so it is fully typed.
+`Toastice` is a small [8.4kB](https://bundlephobia.com/package/toastice@1.0.0) gzipped library that makes adding toasts to your project, easy and simple. It is written in `typescript` so it is fully typed.
 
 ## Features
 
